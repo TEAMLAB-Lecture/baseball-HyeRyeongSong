@@ -307,7 +307,7 @@ def main():
         if is_digit(user_input_number) and int(user_input_number) == 0:
             print("Thank you for using this program")
             print("End of the Game")
-            return
+            break
 
         # 잘못 입력 시 오류 메시지 출력
         while not is_validated_number(user_input_number):
@@ -336,7 +336,7 @@ def main():
             else:
                 print("Thank you for using this program")
                 print("End of the Game")
-                return
+                break
 
     # ==================================
 
