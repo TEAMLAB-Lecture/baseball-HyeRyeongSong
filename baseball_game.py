@@ -325,6 +325,11 @@ def main():
                     else:
                         print('Wrong Input, Input again')
 
+        # 잘못된 입력이면
+        else:
+            print('Wrong Input, Input again')
+
+        # 사용자가 종료 원할 시 (n 입력) 종료
         if(flag):
             break
     # ==================================
