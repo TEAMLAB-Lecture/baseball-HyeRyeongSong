@@ -301,44 +301,35 @@ def main():
     # 위의 코드를 포함하여 자유로운 수정이 가능함
 
     while True:
+        flag = False
         user_input_number = input("Input guess number : ")
 
         # 0 입력 시 종료
-        if is_digit(user_input_number) and int(user_input_number) == 0:
-            print("Thank you for using this program")
-            print("End of the Game")
+        if user_input_number == '0':
             break
 
-        # 잘못 입력 시 오류 메시지 출력
-        while not is_validated_number(user_input_number):
-            print("Wrong Input, Input again")
-            user_input_number = input("Input guess number : ")
+        # 올바른 입력이면
+        elif is_validated_number(user_input_number):
+            result = get_strikes_or_ball(user_input_number, random_number)
+            print("Strikes : {}, Balls : {}".format(result[0], result[1]))
+            if result[0] == 3:
+                while True:
+                    ans = input("You win, one more(Y/N) ?")
+                    if is_yes(ans):
+                        random_number = str(get_not_duplicated_three_digit_number())
+                        print("Random Number is : ", random_number)
+                        break
+                    elif is_no(ans):
+                        flag = True
+                        break
+                    else:
+                        print('Wrong Input, Input again')
 
-        # strike와 ball 점수
-        result = get_strikes_or_ball(user_input_number, random_number)
-        print("Strikes : " + str(result[0]) + " , Balls : " + str(result[1]))
-
-        # 3 strike 시 게임 종료 여부 확인
-        if result[0] == 3:
-            ans = input("You win, one more(Y/N) ?")
-
-            # 잘못 입력 시 오류 메시지 출력
-            while not (is_yes(ans) or is_no(ans)):
-                print("Wrong Input, Input again")
-                ans = input("You win, one more(Y/N) ?")
-
-            # YES - 게임 지속
-            if is_yes(ans):
-                random_number = str(get_not_duplicated_three_digit_number())
-                print("Random Number is : ", random_number)
-
-            # NO - 게임 종료
-            else:
-                print("Thank you for using this program")
-                print("End of the Game")
-                break
-
+        if(flag):
+            break
     # ==================================
+    print("Thank you for using this program")
+    print("End of the Game")
 
 if __name__ == "__main__":
     main()
